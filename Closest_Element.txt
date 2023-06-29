@@ -1,0 +1,50 @@
+#include<iostream>
+using namespace std;
+int findclosest(int arr[], int size, int target)
+{
+    if(arr[0]>=target)
+        return arr[0];
+    if(arr[size-1]<=target)
+        return arr[size-1];
+    int i=0, j=size, mid=0;
+
+    while(i<j)
+    {
+        mid=i+(j-i)/2;
+        if(arr[mid]==target)
+            return arr[mid];
+        if(arr[mid]>target)
+        {
+            if(mid>0 && target>arr[mid-1])
+
+            if(target-arr[mid-1] >= arr[mid]-target)
+                return arr[mid];
+            else    
+                return arr[mid-1];
+            
+            j=mid;
+        }
+
+        else
+        {
+            if(mid<size-1 && target<arr[mid+1])
+                if(target-arr[mid]>=arr[mid+1]-target)
+                {
+                    return arr[mid+1];
+                }
+                else
+                    return arr[mid];
+            i=mid+1;
+        }
+    }
+    return arr[mid];
+}
+int main()
+{
+    int arr[]={1,2,2,3,6,6,9,10,14};
+    int size=9;
+    int target=8;
+    int closest=findclosest(arr,size,target);
+    cout<<"The closest Element to the target"<<target<<":"<<closest;
+    return 0;
+}
