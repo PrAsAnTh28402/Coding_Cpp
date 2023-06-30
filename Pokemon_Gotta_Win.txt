@@ -1,0 +1,37 @@
+#include<iostream>
+using namespace std;
+
+int check(int n, int m, int x, int y, int mid)
+{
+    if(m+(y*(n-mid-1))-(x*mid)>0)
+        return true;
+    else
+        return false;
+}
+
+
+int countPokemons(int n, int m, int x, int y)
+{
+    int low=0, high=n;
+    int mid=0;
+    while(low<high)
+    {
+        mid=low+(high-low)/2;
+        if(check(n,m,x,y,mid))
+            low=mid+1;
+        else
+            high=mid+1;
+    }
+    return mid;
+}
+
+
+int main()
+{
+    int n=10;
+    int m=100;
+    int x=4;
+    int y=2;
+    cout<<countPokemons(n,m,x,y);
+    return 0;
+}
