@@ -1,0 +1,44 @@
+#include<iostream>
+#include<stdlib.h>
+#include<stdio.h>
+using namespace std;
+
+int checkCutStick(int height[], int cut, int n)
+{
+    int cnt=0;
+    for(int i=0; i<n; i++)
+        cnt+=height[i]/cut;
+    return cnt;
+}
+
+
+int findMaxheight(int height[], int n, int max_height, int x)
+{
+    int l=0,h=max_height, ans=-1;
+    while(l<h)
+    {
+        int m=l+(h-l)/2;
+        if(checkCutStick(height,m,n)>=x)
+        {
+            ans=m;
+            l=m+1;
+        }
+        else
+            h=m-1;
+    }
+    return ans;
+}
+
+
+int main()
+{
+    int n,x;
+    cin>>n>>x;
+    int height[n];
+    for(int i=0;i<n;i++)
+        cin>>height[n];
+    sort(height,height+n);
+    int maxHeight=max_element(height,height+n);
+    cout<<findMaxheight(height,n, maxHeight,x);
+    return 0;
+}
